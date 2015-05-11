@@ -12,10 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.skhalid.hapity.DashboardActivity;
 import com.skhalid.hapity.R;
-
-import static android.view.View.VISIBLE;
 
 public class BottomFragment extends Fragment implements OnClickListener
 {
@@ -27,7 +24,7 @@ public class BottomFragment extends Fragment implements OnClickListener
 	public static boolean isProfileActive = false;
 	public static boolean isAlertActive = false;
 	public static boolean isHomeActive = false;
-	LinearLayout topicLayout,homeLayout,profileLayout,alertLayout;
+	LinearLayout topicLayout,homeLayout,shareLayout,profileLayout,alertLayout;
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,25 +61,6 @@ public class BottomFragment extends Fragment implements OnClickListener
 		{
 			if(!isTypesActive)
 			{
-				try {
-					TestFragment test_fragment = TestFragment.newInstance("Test Fragment");
-					FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-					transaction.replace(R.id.dash_container, test_fragment);
-					transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                    transaction.addToBackStack("topics");
-                    getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-					transaction.commit();
-					isHomeActive = false;
-					homeButton.setImageDrawable(getResources().getDrawable(R.drawable.home_icon_pressed));
-					isTypesActive = true;
-					topics_btn.setImageDrawable(getResources().getDrawable(R.drawable.topics_icon_normal));
-					isAlertActive = false;
-					alertButton.setImageDrawable(getResources().getDrawable(R.drawable.alerts_icon_pressed));
-					isProfileActive = false;
-					profileButton.setImageDrawable(getResources().getDrawable(R.drawable.profile_icon_pressed));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 //				TopicsFragment topics = new TopicsFragment();
 //				FragmentTransaction transaction = getFragmentManager().beginTransaction();
 //				transaction.replace(R.id.dash_container, topics);
@@ -99,25 +77,13 @@ public class BottomFragment extends Fragment implements OnClickListener
 		{
 			if(!isProfileActive)
 			{
-				try {
-					TestFragment test_fragment = TestFragment.newInstance("Test Fragment");
-					FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-					transaction.replace(R.id.dash_container, test_fragment);
-					transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					transaction.addToBackStack("posts");
-					getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-					transaction.commit();
-					isHomeActive = false;
-					homeButton.setImageDrawable(getResources().getDrawable(R.drawable.home_icon_pressed));
-					isTypesActive = false;
-					topics_btn.setImageDrawable(getResources().getDrawable(R.drawable.topics_icon_pressed));
-					isAlertActive = false;
-					alertButton.setImageDrawable(getResources().getDrawable(R.drawable.alerts_icon_pressed));
-					isProfileActive = true;
-					profileButton.setImageDrawable(getResources().getDrawable(R.drawable.profile_icon_normal));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+//				DreamerProfileFragment profileFragment = new DreamerProfileFragment();
+//				FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//				transaction.replace(R.id.dash_container, profileFragment);
+//				transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//				transaction.addToBackStack("profile");
+//				getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//				transaction.commit();
 				
 			}
 		}
@@ -125,25 +91,13 @@ public class BottomFragment extends Fragment implements OnClickListener
 		{
 			if(!isAlertActive)
 			{
-				try {
-					TestFragment test_fragment = TestFragment.newInstance("Test Fragment");
-					FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-					transaction.replace(R.id.dash_container, test_fragment);
-					transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					transaction.addToBackStack("alerts");
-					getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-					transaction.commit();
-					isHomeActive = false;
-					homeButton.setImageDrawable(getResources().getDrawable(R.drawable.home_icon_pressed));
-					isTypesActive = false;
-					topics_btn.setImageDrawable(getResources().getDrawable(R.drawable.topics_icon_pressed));
-					isAlertActive = true;
-					alertButton.setImageDrawable(getResources().getDrawable(R.drawable.alerts_icon_normal));
-					isProfileActive = false;
-					profileButton.setImageDrawable(getResources().getDrawable(R.drawable.profile_icon_pressed));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+//				AlertsFragment alertsFragment = new AlertsFragment();
+//				FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//				transaction.replace(R.id.dash_container, alertsFragment);
+//				transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//				transaction.addToBackStack("alert");
+//				getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//				transaction.commit();
 				
 			}
 			
@@ -152,26 +106,6 @@ public class BottomFragment extends Fragment implements OnClickListener
 		{
 			if(!isHomeActive)
 			{
-
-				try {
-					TestFragment test_fragment = TestFragment.newInstance("Test Fragment");
-					FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-					transaction.replace(R.id.dash_container, test_fragment);
-					transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-					transaction.addToBackStack("posts");
-					getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-					transaction.commit();
-					isHomeActive = true;
-					homeButton.setImageDrawable(getResources().getDrawable(R.drawable.home_icon_normal));
-					isTypesActive = false;
-					topics_btn.setImageDrawable(getResources().getDrawable(R.drawable.topics_icon_pressed));
-					isAlertActive = false;
-					alertButton.setImageDrawable(getResources().getDrawable(R.drawable.alerts_icon_pressed));
-					isProfileActive = false;
-					profileButton.setImageDrawable(getResources().getDrawable(R.drawable.profile_icon_pressed));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 //				DreamListFragment dreamListFragment = new DreamListFragment();
 //				FragmentTransaction transaction = getFragmentManager().beginTransaction();
 //				transaction.replace(R.id.dash_container, dreamListFragment,"DreamList");
