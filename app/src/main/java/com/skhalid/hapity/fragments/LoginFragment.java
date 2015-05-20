@@ -45,6 +45,8 @@ import com.android.volley.VolleyError;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginResult;
@@ -59,6 +61,9 @@ import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static android.view.View.VISIBLE;
 
@@ -131,6 +136,7 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
             public void onClick(View view) {
 
                 SignupFragment signup = new SignupFragment();
+//                ProfileFragment signup = new ProfileFragment();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.dash_container, signup);
                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -174,6 +180,7 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
         fbLoginButton.setReadPermissions("email");
         fbLoginButton.setLoginBehavior(LoginBehavior.SSO_WITH_FALLBACK);
         fbLoginButton.setFragment(this);
+        fbLoginButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         // If using in a fragment
 
         callbackManager = CallbackManager.Factory.create();
@@ -187,12 +194,33 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
                 try {
                     showProgress(true);
                     type = "facebook_id";
-                    String url = "http://testing.egenienext.com/project/hapity/webservice/signin/";
+
                      params = new HashMap<String,String>();
-                    Profile.fetchProfileForCurrentAccessToken();
-                    UserID = Profile.getCurrentProfile().getId();
-                    params.put(type, UserID);
-                    loadAPI(url, params);
+                    GraphRequest request = GraphRequest.newMeRequest(
+                            loginResult.getAccessToken(),
+                            new GraphRequest.GraphJSONObjectCallback() {
+                                @Override
+                                public void onCompleted(
+                                        JSONObject object,
+                                        GraphResponse response) {
+                                    // Application code
+                                    try {
+                                        UserID = object.getString("id");
+                                        params.put(type, UserID);
+                                        String url = "http://testing.egenienext.com/project/hapity/webservice/signin/";
+                                        loadAPI(url, params);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                    Bundle parameters = new Bundle();
+                    parameters.putString("fields", "id,name,email,gender, birthday");
+                    request.setParameters(parameters);
+                    request.executeAsync();
+//                    Profile.fetchProfileForCurrentAccessToken();
+//                    UserID = Profile.getCurrentProfile().getId();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -290,7 +318,7 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >=4;
     }
 
     /**

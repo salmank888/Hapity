@@ -44,12 +44,14 @@ buildscript {
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.google.android.gms:play-services:7.0.0'
+    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.google.android.gms:play-services:7.3.0'
     compile('com.twitter.sdk.android:twitter:1.4.0@aar') {
         transitive = true;
     }
     compile project(':facebook')
     compile files('libs/volley.jar')
     compile 'com.google.code.gson:gson:2.3'
+    compile 'info.hoang8f:android-segmented:1.0.5'
+
 }
